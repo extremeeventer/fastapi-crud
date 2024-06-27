@@ -3,8 +3,6 @@ from alembic.config import Config
 import uvicorn
 from datetime import datetime
 
-from fastapi_crud.main import app
-
 alembic_cfg = Config("alembic.ini")
 
 
@@ -14,4 +12,4 @@ def migrate():
 
 
 def dev():
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run("fastapi_crud.main:app", host="127.0.0.1", port=8000, reload=True)

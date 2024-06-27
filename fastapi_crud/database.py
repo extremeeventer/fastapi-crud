@@ -1,13 +1,15 @@
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlmodel import Session, create_engine
 
-DATABASE_URL = "mysql+aiomysql://root:root@localhost:3306/crud"
+from fastapi_crud.config import get_settings
 
-engine = create_async_engine(DATABASE_URL, echo=True)
+settings = get_settings()
 
-async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+DATABASE_URL = f"{settings.db_type}+{settings.db_mode}://{settings.db_username}:{settings.db_password}@{settings.db_host}:{settings.db_port}/{settings.db_name}"
+
+engine = create_engine(DATABASE_URL, echo=True)
+
+session = Session(engine)
 
 
-async def get_session():
-    async with async_session() as session:
-        yield session
+def get_session():
+    return session
