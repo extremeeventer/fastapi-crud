@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from sqlmodel import SQLModel
 from alembic import context
 
-from fastapi_crud.model.main import *
+from fastapi_crud.model import user
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

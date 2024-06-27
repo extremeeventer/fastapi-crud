@@ -4,13 +4,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi_crud.database import get_session
 from fastapi_crud.controller import auth
+from fastapi_crud.schema.auth import RegisterRequest
 
 router = APIRouter()
 
 
-@router.get("/register")
-async def register(session: AsyncSession = Depends(get_session)):
-    return await auth.register(session)
+@router.post("/register")
+async def register(
+    _user: RegisterRequest, session: AsyncSession = Depends(get_session)
+):
+    return await auth.register(_user, session)
 
 
 @router.get("/login")
