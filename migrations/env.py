@@ -1,9 +1,6 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
-from sqlmodel import SQLModel
+from sqlmodel import SQLModel, engine_from_config, pool
 from alembic import context
 
 from fastapi_crud.model import user
